@@ -1,0 +1,63 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+class Bogie {
+    private String name;
+    private String type;
+    private int capacity;
+
+    public Bogie(String name, String type, int capacity) {
+        this.name = name;
+        this.type = type;
+        this.capacity = capacity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (Capacity: " + capacity + ")";
+    }
+}
+
+public class TrainConsistManagementApp {
+
+    public static void main(String[] args) {
+        System.out.println("=== Train Consist Management App ===");
+        
+        List<Bogie> trainConsist = new ArrayList<>();
+
+        System.out.println("Adding bogies to the consist...");
+        trainConsist.add(new Bogie("Sleeper S1", "Passenger", 72));
+        trainConsist.add(new Bogie("Sleeper S2", "Passenger", 72));
+        trainConsist.add(new Bogie("AC Chair C1", "Passenger", 75));
+        trainConsist.add(new Bogie("Pantry Car", "Service", 0));
+        trainConsist.add(new Bogie("Guard Van", "Service", 5));
+        trainConsist.add(new Bogie("Cargo Alpha", "Freight", 0));
+        trainConsist.add(new Bogie("Cargo Beta", "Freight", 0));
+
+        System.out.println("\nGrouping bogies by category using Streams...");
+        Map<String, List<Bogie>> groupedBogies = trainConsist.stream()
+                .collect(Collectors.groupingBy(Bogie::getType));
+
+        System.out.println("Grouped Bogie Structure:");
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println("[" + entry.getKey() + " Bogies]");
+            for (Bogie bogie : entry.getValue()) {
+                System.out.println("  - " + bogie.getName());
+            }
+        }
+    }
+}
