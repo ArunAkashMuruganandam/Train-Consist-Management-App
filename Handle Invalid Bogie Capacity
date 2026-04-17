@@ -1,0 +1,32 @@
+class InvalidCapacityException extends Exception {
+    public InvalidCapacityException(String message) {
+        super(message);
+    }
+}
+
+class PassengerBogie {
+    int capacity;
+
+    PassengerBogie(int capacity) throws InvalidCapacityException {
+        if (capacity <= 0) {
+            throw new InvalidCapacityException("Invalid capacity");
+        }
+        this.capacity = capacity;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            PassengerBogie b1 = new PassengerBogie(50);
+            System.out.println("Passenger bogie created with capacity: " + b1.capacity);
+
+            PassengerBogie b2 = new PassengerBogie(0);
+            System.out.println("Passenger bogie created with capacity: " + b2.capacity);
+        } catch (InvalidCapacityException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("Program continues...");
+    }
+}
