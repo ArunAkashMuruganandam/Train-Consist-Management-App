@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of bogie types: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        String[] bogieTypes = new String[n];
+
+        for (int i = 0; i < n; i++) {
+            bogieTypes[i] = sc.nextLine();
+        }
+
+        Arrays.sort(bogieTypes);
+
+        System.out.println("Sorted bogie types:");
+        System.out.println(Arrays.toString(bogieTypes));
+
+        sc.close();
+    }
+}
